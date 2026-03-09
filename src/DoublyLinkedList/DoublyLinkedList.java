@@ -96,21 +96,56 @@ public class DoublyLinkedList {
 
     public void deleteFirst(){
         if (size == 0){
-
+            return;
+        }
+        if (size == 1){
+            head = null;
+            tail = null;
+            size--;
+        } else {
+            head = head.next;
+            head.prev = null;
+            size--;
         }
     }
 
     public void deleteLast(){
-
+        if (size == 0){
+            return;
+        }
+        if (size == 1){
+            head = null;
+            tail = null;
+            size--;
+        } else {
+            tail = tail.prev;
+            tail.next = null;
+            size--;
+        }
     }
 
-    public void delete(){
-
+    public void delete(int index){
+        if (index == 0){
+            deleteFirst();
+        }
+        if (index == size - 1){
+            deleteLast();
+        } else {
+            Node temp1 = head;
+            for (int i = 0; i < index; i++){
+                temp1 = temp1.next;
+            }
+            Node prev = temp1.prev;
+            Node next = temp1.next;
+            prev.next = next;
+            next.prev = prev;
+            size--;
+        }
     }
 
     public Object get(int index){
         Node n = head;
-        for (int i=0; i < index; i++){
+        for (int i = 0; i < index; i++){
             n = n.next;
         }
         return n;
